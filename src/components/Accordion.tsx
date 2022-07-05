@@ -46,7 +46,7 @@ export const Accordion = ({
   ) => {
     e.stopPropagation();
     if (details.age < 18)
-      return alert("Age should be above 18 to edit user details!");
+      return alert("Age should be 18 and above to edit user details!");
     if (
       details.country === "" ||
       details.name === "" ||
