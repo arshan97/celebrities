@@ -80,7 +80,7 @@ export const Accordion = ({
     setDetails({
       name: first + " " + last,
       age: getAge(),
-      gender: gender,
+      gender: gender.charAt(0).toUpperCase() + gender.slice(1),
       country: country,
       description: description,
     });
@@ -209,7 +209,7 @@ export const Accordion = ({
                     onChange={handleChange}
                   >
                     {GENDER_OPTIONS.map((option) => (
-                      <option value={option}>{option}</option>
+                      <option value={option} selected>{option}</option>
                     ))}
                   </select>
                 ) : (
