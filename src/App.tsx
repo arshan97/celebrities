@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { UserList } from './components/UserList';
+import styled from 'styled-components';
+import 'antd/dist/antd.css';
+import { BREAKPOINTS } from './utils';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledMain>
+     <UserList />
+    </StyledMain>
   );
 }
+
+const StyledMain = styled.div`
+  margin: 0 auto;
+  width: 50%;
+
+  @media (max-width: ${BREAKPOINTS.TABLET}) {
+    width: 70%;
+  }
+
+  @media (max-width: ${BREAKPOINTS.MOBILE}) {
+    width: 90%;
+  }
+`;
 
 export default App;
