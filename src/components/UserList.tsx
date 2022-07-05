@@ -28,9 +28,12 @@ export const UserList = () => {
   //Search user
   const handleSearchUser = (e: React.ChangeEvent<HTMLInputElement>) => {
     const filteredData = celebrities.filter((item) => {
-      return Object.values(item).join('').toLowerCase().includes(e.target.value.toLowerCase())
-  })
-  setCelebritiesData(filteredData)
+      return Object.values(item)
+        .join("")
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    });
+    setCelebritiesData(filteredData);
   };
 
   return (
@@ -103,7 +106,7 @@ const StyledButtons = styled.div`
 `;
 
 const StyledSearch = styled(Input)`
-    border-radius: 10px;
-    border: 1px solid darkgray;
-    height: 40px;
-`
+  border-radius: 10px;
+  border: 1px solid darkgray;
+  height: 40px;
+`;

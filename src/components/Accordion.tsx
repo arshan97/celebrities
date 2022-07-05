@@ -7,6 +7,7 @@ import SaveIcon from "../assets/save.png";
 import CancelIcon from "../assets/cancel.png";
 import { AccordionProps } from "../interfaces/AccordionProps";
 import { BOX_SHADOWS, DISPLAY_FLEX, GENDER_OPTIONS } from "../utils";
+import { Button } from "antd";
 
 export const Accordion = ({
   data,
@@ -46,6 +47,12 @@ export const Accordion = ({
     e.stopPropagation();
     if (details.age < 18)
       return alert("Age should be above 18 to edit user details!");
+    if (
+      details.country === "" ||
+      details.name === "" ||
+      details.description === ""
+    )
+      return alert("Cannot be empty!");
     setTempState(details);
     setEdit(!edit);
   };
@@ -57,7 +64,6 @@ export const Accordion = ({
       | React.ChangeEvent<HTMLSelectElement>
       | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    if (e.target.value === "") return alert("Cannot be empty!");
     setDetails((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -113,7 +119,10 @@ export const Accordion = ({
   const renderSaveAndDelete = () => {
     return (
       <StyledSaveAndCancel>
-        <button
+        <Button
+          disabled={
+            JSON.stringify(prevStateRef.current) === JSON.stringify(details)
+          }
           onClick={
             JSON.stringify(prevStateRef.current) !== JSON.stringify(details)
               ? handleEdit
@@ -121,9 +130,9 @@ export const Accordion = ({
           }
         >
           <img src={SaveIcon} alt="save" />
-        </button>
+        </Button>
 
-        <button
+        <Button
           onClick={(e) => {
             e.stopPropagation();
             setEdit(false);
@@ -131,7 +140,7 @@ export const Accordion = ({
           }}
         >
           <img src={CancelIcon} alt="cancel" />
-        </button>
+        </Button>
       </StyledSaveAndCancel>
     );
   };
@@ -163,7 +172,7 @@ export const Accordion = ({
         </div>
       </StyledMain>
 
-      {collapsed === idx && [edit] && (
+      {collapsed === idx && (
         <div>
           <StyledDetails>
             <div>
@@ -273,7 +282,7 @@ const StyledAccordion = styled.div`
 `;
 
 const StyledMain = styled.div<{ collapsed: Boolean }>`
-  ${DISPLAY_FLEX('space-between', 'center')};
+  ${DISPLAY_FLEX("space-between", "center")};
 
   & > div {
     &:first-child {
@@ -312,7 +321,7 @@ const StyledMain = styled.div<{ collapsed: Boolean }>`
 `;
 
 const StyledDetails = styled.div`
-   ${DISPLAY_FLEX('space-between')};
+  ${DISPLAY_FLEX("space-between")};
   margin: 10px 40px 10px 0;
   flex-wrap: wrap;
   padding: 10px;
@@ -360,7 +369,7 @@ const StyledDescription = styled.div`
 `;
 
 const StyledEditDelete = styled.div`
-   ${DISPLAY_FLEX('flex-end', 'center')};
+  ${DISPLAY_FLEX("flex-end", "center")};
   gap: 10px;
   margin-bottom: 10px;
 
@@ -380,7 +389,7 @@ const StyledEditDelete = styled.div`
 `;
 
 const StyledSaveAndCancel = styled.div`
-   ${DISPLAY_FLEX('flex-end')};
+  ${DISPLAY_FLEX("flex-end")};
   gap: 12px;
 
   img {
@@ -391,5 +400,9 @@ const StyledSaveAndCancel = styled.div`
     border: none;
     background: none;
     cursor: pointer;
+  }
+
+  .ant-btn[disabled] {
+    background: none;
   }
 `;

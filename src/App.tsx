@@ -1,12 +1,12 @@
-import { UserList } from './components/UserList';
-import styled from 'styled-components';
-import 'antd/dist/antd.css';
-import { BREAKPOINTS } from './utils';
+import { UserList } from "./components/UserList";
+import styled from "styled-components";
+import "antd/dist/antd.css";
+import { BREAKPOINTS } from "./utils";
 
 function App() {
   return (
     <StyledMain>
-     <UserList />
+      <UserList />
     </StyledMain>
   );
 }
